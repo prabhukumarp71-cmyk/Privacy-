@@ -26,11 +26,18 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Decode debug.keystore
+      - name: Prepare debug keystore
         run: |
-          if [ -f debug.keystore.base64 ] && [ ! -f debug.keystore ]; then
-            base64 -d debug.keystore.base64 > debug.keystore || base64 --decode debug.keystore.base64 > debug.keystore
+          if [ ! -f debug.keystore ] || [ ! -s debug.keystore ]; then
+            if [ -f debug.keystore.base64 ]; then
+              base64 -d debug.keystore.base64 > debug.keystore 2>/dev/null || base64 --decode debug.keystore.base64 > debug.keystore 2>/dev/null || openssl base64 -d -in debug.keystore.base64 -out debug.keystore 2>/dev/null
+            fi
+            if [ ! -f debug.keystore ] || [ ! -s debug.keystore ]; then
+              echo "Generating fallback debug keystore..."
+              keytool -genkey -v -keystore debug.keystore -alias androiddebugkey -storepass android -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
+            fi
           fi
+          ls -la debug.keystore
 
       - name: Prepare environment file
         run: |
