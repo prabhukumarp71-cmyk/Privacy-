@@ -1,0 +1,6 @@
+{
+  "name": "TouchGuard",
+  "description": "Closes running apps, returns to home, and turns off screen when motion or touch is detected.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

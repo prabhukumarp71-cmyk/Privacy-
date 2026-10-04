@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TouchGuard</string>
+    <string name="accessibility_description">TouchGuard uses Accessibility to automatically close foreground apps, return to home, and lock the screen when unauthorized motion or touch is detected.</string>
+    <string name="device_admin_description">Enables TouchGuard to immediately turn off screen and lock the device when motion is detected.</string>
+    <string name="notification_channel_name">Motion Protection Service</string>
+    <string name="notification_channel_desc">Active protection status and alarm notifications</string>
+</resources>
